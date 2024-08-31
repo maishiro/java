@@ -9,7 +9,7 @@
         SELECT * FROM books WHERE id = #{id}
     </select>
 
-    <insert id="insertBook" parameterType="com.example.webapidemo.entity.Book">
+    <insert id="insertBook" parameterType="com.example.webapidemo.entity.Book" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO books (title, author, publication_year, isbn, price)
         VALUES (#{title}, #{author}, #{publicationYear}, #{isbn}, #{price})
     </insert>
