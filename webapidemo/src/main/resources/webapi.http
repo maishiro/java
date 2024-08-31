@@ -1,0 +1,14 @@
+###
+GET http://127.0.0.1:8080/api/books
+
+###
+POST http://127.0.0.1:8080/api/books
+content-type: application/json
+
+{
+    "title": "test1",
+    "author": "user1",
+    "publicationYear": 2024,
+    "isbn": "1234",
+    "price": 500
+}

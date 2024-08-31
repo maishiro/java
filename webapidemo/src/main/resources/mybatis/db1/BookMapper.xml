@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.webapidemo.mapper.db1.BookMapper">
+    <select id="getAllBooks" resultType="com.example.webapidemo.entity.Book">
+        SELECT * FROM books
+    </select>
+
+    <select id="getBookById" parameterType="long" resultType="com.example.webapidemo.entity.Book">
+        SELECT * FROM books WHERE id = #{id}
+    </select>
+
+    <insert id="insertBook" parameterType="com.example.webapidemo.entity.Book">
+        INSERT INTO books (title, author, publication_year, isbn, price)
+        VALUES (#{title}, #{author}, #{publicationYear}, #{isbn}, #{price})
+    </insert>
+
+    <update id="updateBook" parameterType="com.example.webapidemo.entity.Book">
+        UPDATE books
+        SET title = #{title}, author = #{author}, publication_year = #{publicationYear},
+        isbn = #{isbn}, price = #{price}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBook" parameterType="long">
+        DELETE FROM books WHERE id = #{id}
+    </delete>
+</mapper>
