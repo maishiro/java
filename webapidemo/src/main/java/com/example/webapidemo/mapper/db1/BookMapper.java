@@ -9,7 +9,7 @@ import java.util.List;
 public interface BookMapper {
     List<Book> getAllBooks();
     Book getBookById(Long id);
-    void insertBook(Book book);
+    int insertBook(Book book);
     void updateBook(Book book);
     void deleteBook(Long id);
 }
