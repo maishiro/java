@@ -11,7 +11,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BookControllerIntegrationTest extends AbstractIntegrationTest {
+public class BookControllerIT extends AbstractIntegrationTest {
 
     @Autowired
     TestRestTemplate restTemplate;

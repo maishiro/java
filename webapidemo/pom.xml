@@ -113,14 +113,47 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<!-- ユニットテスト用のSurefireプラグイン -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<argLine>-Xmx1024m</argLine>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/*IT.java</exclude>
+					</excludes>					
 				</configuration>
 			</plugin>
-
+			<!-- add code coverage and make sure it covers both Junit4 and Junit5 -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<!-- defaults to target/jacoco.exec -->
+				<executions>
+					<!-- allow Jacoco to run -->
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<!--	Generate the html report for the test phase
+							https://www.eclemma.org/jacoco/trunk/doc/report-mojo.html
+		                    -->
+					<execution>
+						<id>report</id>
+						<!-- generate coverage report for test phase -->
+						<!-- target/site/jacoco -->
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -138,8 +171,23 @@
 							</sources>
 						</configuration>
 					</execution>
+					<execution>
+						<id>add-integration-test-resources</id>
+						<phase>generate-test-resources</phase>
+						<goals>
+							<goal>add-test-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>src/intTest/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
+			<!-- インテグレーションテスト用のFailsafeプラグイン -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -152,6 +200,11 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<includes>
+						<include>**/*IT.java</include>
+					</includes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

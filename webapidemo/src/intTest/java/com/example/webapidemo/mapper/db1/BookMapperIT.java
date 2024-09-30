@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class BookMapperIntegrationTest extends AbstractIntegrationTest {
+public class BookMapperIT extends AbstractIntegrationTest {
 
     @Autowired
     private BookMapper bookMapper;
