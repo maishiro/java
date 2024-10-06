@@ -26,8 +26,12 @@ public class AbstractIntegrationTest {
                                                                         .withUsername("postgres")
                                                                         .withPassword("postgres")
                                                                         .withFileSystemBind(
-                                                                                "src/main/resources/mybatis/db1/init.sql",
+                                                                                "src/main/resources/mybatis/db1/init/init.sql",
                                                                                 "/docker-entrypoint-initdb.d/01-schema.sql",
+                                                                                BindMode.READ_ONLY)
+                                                                        .withFileSystemBind(
+                                                                                "src/main/resources/mybatis/db1/pg_hba.conf",
+                                                                                "/etc/postgresql/pg_hba.conf",
                                                                                 BindMode.READ_ONLY)
                                                                         ;
 
